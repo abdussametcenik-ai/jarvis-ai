@@ -1,0 +1,13 @@
+{
+  "name": "Hacım",
+  "default_tabs": [
+    "https://mail.google.com",
+    "https://www.canva.com",
+    "https://open.spotify.com"
+  ],
+  "commands": {
+    "canva aç": "https://www.canva.com",
+    "gmail aç": "https://mail.google.com",
+    "spotify aç": "https://open.spotify.com"
+  }
+}
