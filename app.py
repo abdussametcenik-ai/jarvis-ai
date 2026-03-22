@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 from brain import think
 import os
 
-
 app = Flask(__name__)
 
 @app.route("/")
@@ -23,12 +22,37 @@ body{
     color:white;
 }
 
+/* 🔥 IRON MAN BACKGROUND */
+.ironman-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    opacity: 0.15;
+}
+
+.ironman-bg svg {
+    width: 320px;
+    height: 320px;
+}
+
+.ironman-bg path {
+    fill: none;
+    stroke: orange;
+    stroke-width: 3;
+    filter: drop-shadow(0 0 10px orange);
+}
+
+/* CHAT ÜSTTE KALSIN */
 #container{
-    max-width:720px;
+    max-width:900px;
     height:100vh;
     margin:auto;
     display:flex;
     flex-direction:column;
+    position:relative;
+    z-index:2;
 }
 
 header{
@@ -38,23 +62,23 @@ header{
     font-weight:900;
     letter-spacing:4px;
     color:#ff7a00;
-    font-size:20px;
+    font-size:22px;
     border-bottom:1px solid #222;
 }
 
 #chat{
     flex:1;
     overflow-y:auto;
-    padding:20px;
+    padding:24px;
 }
 
 .msg{
-    max-width:80%;
-    padding:16px 20px;
-    margin:12px 0;
+    max-width:85%;
+    padding:18px 22px;
+    margin:14px 0;
     border-radius:18px;
-    font-weight:600;
-    font-size:17px;
+    font-weight:700;
+    font-size:18px;
     animation:fade 0.25s ease-in;
 }
 
@@ -76,7 +100,7 @@ header{
 footer{
     display:flex;
     gap:10px;
-    padding:14px;
+    padding:16px;
     background:#000;
     border-top:1px solid #222;
 }
@@ -89,8 +113,8 @@ input{
     border:1px solid #ff7a00;
     border-radius:16px;
     outline:none;
-    font-size:17px;
-    font-weight:600;
+    font-size:18px;
+    font-weight:700;
 }
 
 input::placeholder{
@@ -98,13 +122,14 @@ input::placeholder{
 }
 
 button{
-    padding:18px 24px;
+    padding:18px 26px;
     background:#ff7a00;
     border:none;
     border-radius:16px;
     font-weight:900;
     font-size:18px;
     color:black;
+    cursor:pointer;
 }
 
 @keyframes fade{
@@ -115,6 +140,17 @@ button{
 </head>
 
 <body>
+
+<!-- 🔥 IRON MAN SVG -->
+<div class="ironman-bg">
+<svg viewBox="0 0 200 200">
+  <path d="M50 40 L150 40 L170 90 L150 150 L50 150 L30 90 Z" />
+  <path d="M70 80 L90 80 L90 100 L70 100 Z" />
+  <path d="M110 80 L130 80 L130 100 L110 100 Z" />
+  <path d="M80 120 L120 120 L110 140 L90 140 Z" />
+</svg>
+</div>
+
 <div id="container">
 
 <header>J A R V I S</header>
