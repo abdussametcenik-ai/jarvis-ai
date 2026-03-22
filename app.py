@@ -181,17 +181,33 @@ function send(){
 def chat():
     msg = request.json["message"].lower()
 
-    # 🔥 CANVA KOMUTU
+    # 🔥 SİTELER
     if "canva" in msg:
         return jsonify({
-            "reply": '<a href="https://www.canva.com" target="_blank" style="color:#ff7a00;font-weight:bold;">👉 Canva açmak için buraya tıkla</a>'
+            "reply": '<a href="https://www.canva.com" target="_blank">👉 Canva aç</a>'
         })
 
-    reply = think(msg)
-    return jsonify({"reply": reply})
+    if "youtube" in msg:
+        return jsonify({
+            "reply": '<a href="https://www.youtube.com" target="_blank">👉 YouTube aç</a>'
+        })
 
-if __name__ == "__main__":
-    app.run(
-        host="0.0.0.0",
-        port=int(os.environ.get("PORT", 3000))
+    if "gmail" in msg or "mail" in msg:
+        return jsonify({
+            "reply": '<a href="https://mail.google.com" target="_blank">👉 Gmail aç</a>'
+        })
+
+    if "spotify" in msg:
+        return jsonify({
+            "reply": '<a href="https://open.spotify.com" target="_blank">👉 Spotify aç</a>'
+        })
+
+    if "google" in msg:
+        return jsonify({
+            "reply": '<a href="https://www.google.com" target="_blank">👉 Google aç</a>'
+        })
+
+    # normal cevap
+    reply = think(msg)
+    return jsonify({"reply": reply}
     )
