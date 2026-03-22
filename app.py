@@ -168,6 +168,18 @@ button{
 const input = document.getElementById("text");
 const chat = document.getElementById("chat");
 
+/* 🔥 YENİ EKLEDİĞİM KISIM */
+function handleCommand(text){
+    text = text.toLowerCase();
+
+    if(text.includes("canva")){
+        window.open("https://www.canva.com", "_blank");
+        return true;
+    }
+
+    return false;
+}
+
 input.addEventListener("keydown", function(e){
     if(e.key === "Enter"){
         e.preventDefault();
@@ -175,12 +187,19 @@ input.addEventListener("keydown", function(e){
     }
 });
 
+/* 🔥 DEĞİŞTİRİLMİŞ SEND */
 function send(){
     let text = input.value.trim();
     if(!text) return;
 
     chat.innerHTML += `<div class="msg user">${text}</div>`;
     chat.scrollTop = chat.scrollHeight;
+
+    // 👇 CANVA KONTROL
+    if(handleCommand(text)){
+        input.value = "";
+        return;
+    }
 
     fetch("/chat",{
         method:"POST",
