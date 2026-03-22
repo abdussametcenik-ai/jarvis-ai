@@ -22,7 +22,7 @@ body{
     color:white;
 }
 
-/* 🔥 IRON MAN BACKGROUND */
+/* IRON MAN BACKGROUND */
 .ironman-bg {
     position: fixed;
     top: 50%;
@@ -44,7 +44,6 @@ body{
     filter: drop-shadow(0 0 10px orange);
 }
 
-/* CHAT ÜSTTE KALSIN */
 #container{
     max-width:900px;
     height:100vh;
@@ -79,21 +78,16 @@ header{
     border-radius:18px;
     font-weight:700;
     font-size:18px;
-    animation:fade 0.25s ease-in;
 }
 
 .user{
     background:#ff7a00;
-    color:white;
     margin-left:auto;
-    border-bottom-right-radius:6px;
 }
 
 .bot{
     background:#ff7a00;
-    color:white;
     margin-right:auto;
-    border-bottom-left-radius:6px;
     opacity:0.9;
 }
 
@@ -101,7 +95,6 @@ footer{
     display:flex;
     gap:10px;
     padding:16px;
-    background:#000;
     border-top:1px solid #222;
 }
 
@@ -112,13 +105,7 @@ input{
     color:white;
     border:1px solid #ff7a00;
     border-radius:16px;
-    outline:none;
     font-size:18px;
-    font-weight:700;
-}
-
-input::placeholder{
-    color:#aaa;
 }
 
 button{
@@ -127,21 +114,13 @@ button{
     border:none;
     border-radius:16px;
     font-weight:900;
-    font-size:18px;
-    color:black;
     cursor:pointer;
-}
-
-@keyframes fade{
-    from{opacity:0; transform:translateY(8px)}
-    to{opacity:1; transform:translateY(0)}
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🔥 IRON MAN SVG -->
 <div class="ironman-bg">
 <svg viewBox="0 0 200 200">
   <path d="M50 40 L150 40 L170 90 L150 150 L50 150 L30 90 Z" />
@@ -152,33 +131,18 @@ button{
 </div>
 
 <div id="container">
-
 <header>J A R V I S</header>
-
 <div id="chat"></div>
 
 <footer>
-    <input id="text" placeholder="Bir şey yaz Hacım..." />
-    <button onclick="send()">➤</button>
+<input id="text" placeholder="Bir şey yaz Hacım..." />
+<button onclick="send()">➤</button>
 </footer>
-
 </div>
 
 <script>
 const input = document.getElementById("text");
 const chat = document.getElementById("chat");
-
-/* 🔥 YENİ EKLEDİĞİM KISIM */
-function handleCommand(text){
-    text = text.toLowerCase();
-
-    if(text.includes("canva")){
-        window.open("https://www.canva.com", "_blank");
-        return true;
-    }
-
-    return false;
-}
 
 input.addEventListener("keydown", function(e){
     if(e.key === "Enter"){
@@ -187,19 +151,12 @@ input.addEventListener("keydown", function(e){
     }
 });
 
-/* 🔥 DEĞİŞTİRİLMİŞ SEND */
 function send(){
     let text = input.value.trim();
     if(!text) return;
 
     chat.innerHTML += `<div class="msg user">${text}</div>`;
     chat.scrollTop = chat.scrollHeight;
-
-    // 👇 CANVA KONTROL
-    if(handleCommand(text)){
-        input.value = "";
-        return;
-    }
 
     fetch("/chat",{
         method:"POST",
@@ -222,7 +179,14 @@ function send(){
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    msg = request.json["message"]
+    msg = request.json["message"].lower()
+
+    # 🔥 CANVA KOMUTU
+    if "canva" in msg:
+        return jsonify({
+            "reply": '<a href="https://www.canva.com" target="_blank" style="color:#ff7a00;font-weight:bold;">👉 Canva açmak için buraya tıkla</a>'
+        })
+
     reply = think(msg)
     return jsonify({"reply": reply})
 
