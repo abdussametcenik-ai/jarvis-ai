@@ -53,3 +53,4 @@ def start_ui(on_message):
     write("JARVIS", "Hazırım Hacım. Seni dinliyorum.")
 
     window.mainloop()
+
